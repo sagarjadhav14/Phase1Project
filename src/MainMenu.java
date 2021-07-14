@@ -1,12 +1,9 @@
 
-import java.io.File;
-import java.io.FileWriter;
 import java.util.Scanner;
 import java.io.*;
 
 
 public class MainMenu {
-
 	public static void main(String[] args) {
 		AllInOneMethod impobj = new AllInOneMethod();
 		System.out.println(" ");
@@ -33,17 +30,13 @@ public class MainMenu {
 						+ "\n Enter d: To delete File. "
 						+ "\n Enter r: To read File. "
 						+ "\n Enter f: To Find Existing File. ");
-				System.out.println("Select One Option : ");
-			
+				System.out.println("Select One Option : ");		
 			}else if(mainChoice.equals("e")) {
 				impobj.Stop();
 				break;
-			
 			}else {
 				System.out.println("Invalid : Choose only y or e");
-			}
-			
-			
+			}			
 			String choice =sc.nextLine();
 			
 			switch (choice) {
@@ -57,7 +50,12 @@ public class MainMenu {
 				impobj.Delete();
 				break;
 			case "r" :
-				impobj.Read();
+				try {
+					impobj.Read();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				break;
 			case "f" :
 				impobj.Search();
@@ -65,11 +63,7 @@ public class MainMenu {
 			default:
 				System.out.println("Invaild Option : Enter one of Following : s,c,d,r,f ");
 				break;
-			}
-			
-			
-			
-			
+			}			
 		}
 				
 	}

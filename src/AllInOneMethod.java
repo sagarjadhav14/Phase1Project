@@ -70,20 +70,38 @@ public class AllInOneMethod {
 	
 
 	
-	public void Read() {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("File name with extension to be Read");
-		String inputName = sc.nextLine();
-		File file = new File("C:\\Users\\sagar\\Desktop\\SimpliLearn\\Live Lecture\\Phase 1\\Phase1ProjectLockers"+inputName);
-		try {
-			Scanner scan = new Scanner(file);
-			while(scan.hasNextLine()) {
-				System.out.println(scan.nextLine());
+	public void Read() throws FileNotFoundException{
+			File file = new File("C:\\Users\\sagar\\Desktop\\SimpliLearn\\Live Lecture\\Phase 1\\Phase1ProjectLockers");
+			List<String> listFile = Arrays.asList(file.list());
+			File[] filelist = file.listFiles();
+			if(file.isDirectory()) {
+				Scanner fileScanner = new Scanner(System.in);
+				System.out.println("Name of File to be read ");
+				String r = fileScanner.nextLine();
+				File readFile = new File("C:\\Users\\sagar\\Desktop\\SimpliLearn\\Live Lecture\\Phase 1\\Phase1ProjectLockers\\"+r);
+				boolean b=false;
+				if(filelist==null) {
+					System.out.println("File not found or empty folder");
+				}
+				for(File i : filelist) {
+					String content = i.getName();
+					if(content.equals(r)) {
+						b=true;
+						break;
+					}
+				}
+				if(!b) {
+					System.out.println("File Not Found");
+				}else {
+					Scanner sc = new Scanner (readFile);
+					while(sc.hasNext()) {
+						System.out.println(sc.nextLine());
+					}
+				}
 			}
-			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+			else {
+				System.out.println(file.getAbsolutePath() +" Give Correct Path");
+			}
 	}
 	
 	
